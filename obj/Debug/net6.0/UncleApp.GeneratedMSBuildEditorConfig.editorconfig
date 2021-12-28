@@ -8,45 +8,45 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = UncleApp
 build_property.RootNamespace = UncleApp
-build_property.ProjectDir = g:\users\kyawe\asp_net_core\UncleApp\UncleApp\
+build_property.ProjectDir = G:\users\kyawe\asp_net_core\UncleApp\UncleApp\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = g:\users\kyawe\asp_net_core\UncleApp\UncleApp
+build_property.MSBuildProjectDirectory = G:\users\kyawe\asp_net_core\UncleApp\UncleApp
 build_property._RazorSourceGeneratorDebug = 
 
-[g:/users/kyawe/asp_net_core/UncleApp/UncleApp/Views/Home/Index.cshtml]
+[G:/users/kyawe/asp_net_core/UncleApp/UncleApp/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[g:/users/kyawe/asp_net_core/UncleApp/UncleApp/Views/Home/Privacy.cshtml]
+[G:/users/kyawe/asp_net_core/UncleApp/UncleApp/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[g:/users/kyawe/asp_net_core/UncleApp/UncleApp/Views/Identity/Login.cshtml]
+[G:/users/kyawe/asp_net_core/UncleApp/UncleApp/Views/Identity/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSWRlbnRpdHlcTG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[g:/users/kyawe/asp_net_core/UncleApp/UncleApp/Views/Identity/Register.cshtml]
+[G:/users/kyawe/asp_net_core/UncleApp/UncleApp/Views/Identity/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSWRlbnRpdHlcUmVnaXN0ZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[g:/users/kyawe/asp_net_core/UncleApp/UncleApp/Views/Shared/Error.cshtml]
+[G:/users/kyawe/asp_net_core/UncleApp/UncleApp/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[g:/users/kyawe/asp_net_core/UncleApp/UncleApp/Views/Shared/_ValidationScriptsPartial.cshtml]
+[G:/users/kyawe/asp_net_core/UncleApp/UncleApp/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[g:/users/kyawe/asp_net_core/UncleApp/UncleApp/Views/_ViewImports.cshtml]
+[G:/users/kyawe/asp_net_core/UncleApp/UncleApp/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[g:/users/kyawe/asp_net_core/UncleApp/UncleApp/Views/_ViewStart.cshtml]
+[G:/users/kyawe/asp_net_core/UncleApp/UncleApp/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[g:/users/kyawe/asp_net_core/UncleApp/UncleApp/Views/Shared/_Layout.cshtml]
+[G:/users/kyawe/asp_net_core/UncleApp/UncleApp/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-e0xfa6smfm
