@@ -15,9 +15,9 @@ namespace UncleApp.Context
         public DataContext(){
 
         }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
-                .UseNpgsql(@"Host=localhost;Port=5432;Username=postgres;Password=kyaw;database=uncleapp");
+        // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //     => optionsBuilder
+        //         .UseNpgsql(@"Host=localhost;Port=5432;Username=postgres;Password=kyaw;database=uncleapp");
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Order>().HasOne(p=>p.Customer);

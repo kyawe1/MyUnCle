@@ -20,7 +20,7 @@ byte[] b = Encoding.ASCII.GetBytes(ok);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DataContext")));
+builder.Services.AddDbContext<DataContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DataContext")));
 builder.Services.AddTransient<NotAuthenticatedOnly>();
 
 
