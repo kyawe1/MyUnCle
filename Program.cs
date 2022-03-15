@@ -4,10 +4,14 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using UncleApp.Services.Workers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.Mvc;
 using UncleApp.ActionFilter;
 using UncleApp.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.OpenApi.Models;
+
+
 
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
@@ -23,7 +27,10 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DataContext>();
 // builder.Services.AddDbContext<DataContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DataContext")));
 builder.Services.AddTransient<NotAuthenticatedOnly>();
-
+builder.Services.AddSwaggerGen(options=>{
+    options.CustomSchemaIds(x => x.FullName);
+    options.SwaggerDoc("v1", new OpenApiInfo { Title = "UncleApp", Version = "v1" });
+});
 
 builder.Services.AddIdentityCore<IdentityUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<DataContext>().AddSignInManager<SignInManager<IdentityUser>>().AddUserManager<UserManager<IdentityUser>>().AddRoleManager<RoleManager<IdentityRole>>();
 
@@ -72,7 +79,17 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
+app.UseSwagger();
+
+
 // StartUpData.IntialData(app.Services);
+
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+    options.RoutePrefix = string.Empty;
+    
+});
 
 app.UseEndpoints(endpoints =>
 {

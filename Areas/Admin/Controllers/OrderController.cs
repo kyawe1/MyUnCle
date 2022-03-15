@@ -20,6 +20,7 @@ namespace UncleApp.Areas.Admin
         {
             _dataContext = dataContext;
         }
+        [HttpGet]
         public IActionResult Index()
         {
             var q = _dataContext.orders.Include(p=>p.Customer).ToList();
