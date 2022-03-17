@@ -5,6 +5,8 @@ using UncleApp.Models;
 using UncleApp.Context;
 using UncleApp.Models.ViewModel;
 using Microsoft.AspNetCore.Authorization;
+using UncleApp.ActionFilter;
+
 
 namespace UncleApp.Controllers
 {
@@ -24,6 +26,7 @@ namespace UncleApp.Controllers
         }
         [HttpPost]
         [AllowAnonymous]
+        [ServiceFilter(typeof(NotAuthenticatedOnly))]
         public async Task<IActionResult> login(LoginViewModel _login)
         {
             string token = await handler.GenerateJsonTokenAsync(_login);

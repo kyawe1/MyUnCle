@@ -15,6 +15,10 @@ public class NotAuthenticatedOnly : IActionFilter
     {
         if(context.HttpContext.User.Identity.IsAuthenticated)
         {
+            if(context.HttpContext.Request.ContentType=="application/json")
+            {
+                context.Result=new JsonResult(new {message="You are already logged in"});
+            }
             context.Result=new RedirectToActionResult("Index","Home",new{});
         }
     }

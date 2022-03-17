@@ -27,7 +27,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DataContext>();
 // builder.Services.AddDbContext<DataContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DataContext")));
 builder.Services.AddTransient<NotAuthenticatedOnly>();
-builder.Services.AddSwaggerGen(options=>{
+builder.Services.AddSwaggerGen(options =>
+{
     options.CustomSchemaIds(x => x.FullName);
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "UncleApp", Version = "v1" });
 });
@@ -36,14 +37,15 @@ builder.Services.AddIdentityCore<IdentityUser>().AddRoles<IdentityRole>().AddEnt
 
 //builder.Services.AddScoped<IJsonHandler, JsonTokenGenerator>();
 
-builder.Services.AddAuthentication(options=>{
-    options.DefaultAuthenticateScheme=JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme=JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultScheme=JwtBearerDefaults.AuthenticationScheme;
-    }
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+}
     ).AddCookie().AddJwtBearer(options =>
 {
-    
+
     options.SaveToken = true;
     options.TokenValidationParameters = new TokenValidationParameters
     {
@@ -66,10 +68,20 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
+
+}
+else
+{
+    app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+    options.RoutePrefix = string.Empty;
+
+});
+    app.UseDeveloperExceptionPage();
 }
 
-
-
+app.UseSwagger();
 
 app.UseStaticFiles();
 
@@ -79,17 +91,12 @@ app.UseAuthentication();
 
 app.UseAuthorization();
 
-app.UseSwagger();
+
 
 
 // StartUpData.IntialData(app.Services);
 
-app.UseSwaggerUI(options =>
-{
-    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-    options.RoutePrefix = string.Empty;
-    
-});
+
 
 app.UseEndpoints(endpoints =>
 {
