@@ -24,16 +24,41 @@ byte[] b = Encoding.ASCII.GetBytes(ok);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<DataContext>();
-// builder.Services.AddDbContext<DataContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DataContext")));
+builder.Services.AddDbContext<DataContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DataContext")));
 builder.Services.AddTransient<NotAuthenticatedOnly>();
+var securtiyScheme = new OpenApiSecurityScheme()
+{
+    Name = "Authorization",
+    Type = SecuritySchemeType.ApiKey,
+    Scheme = "Bearer",
+    BearerFormat = "JWT",
+    In = ParameterLocation.Header,
+    Description = "JSON Web Token based security",
+};
+
+var securityreq = new OpenApiSecurityRequirement()
+{
+    {
+        new OpenApiSecurityScheme()
+        {
+            Reference = new OpenApiReference(){
+                 Type = ReferenceType.SecurityScheme,
+                Id = "Bearer"
+            }
+        },
+        new string[] { }
+    }
+};
+
 builder.Services.AddSwaggerGen(options =>
 {
     options.CustomSchemaIds(x => x.FullName);
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "UncleApp", Version = "v1" });
+    options.AddSecurityRequirement(securityreq);
+
 });
 
-builder.Services.AddIdentityCore<IdentityUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<DataContext>().AddSignInManager<SignInManager<IdentityUser>>().AddUserManager<UserManager<IdentityUser>>().AddRoleManager<RoleManager<IdentityRole>>();
+builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddSignInManager<SignInManager<IdentityUser>>().AddUserManager<UserManager<IdentityUser>>().AddRoleManager<RoleManager<IdentityRole>>().AddEntityFrameworkStores<DataContext>();
 
 //builder.Services.AddScoped<IJsonHandler, JsonTokenGenerator>();
 
