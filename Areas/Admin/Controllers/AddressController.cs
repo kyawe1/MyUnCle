@@ -8,7 +8,7 @@ namespace UncleApp.Areas.Admin.Controllers;
 [Authorize(Roles ="Admin,Shopkeeper")]
 [ApiController]
 [Area("Admin")]
-[Route("api/v1/[area]/[controller]/[action]/{id?}")]
+[Route("api/v1/[area]/[controller]/[action]")]
 public class AddressController : ControllerBase
 {
     private DataContext _dataContext;
@@ -16,7 +16,7 @@ public class AddressController : ControllerBase
     {
         _dataContext = dataContext;
     }
-    [HttpDelete]
+    [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(string id)
     {
         var k=_dataContext.addresses.FirstOrDefault(p => p.Address_String == id);
@@ -29,7 +29,7 @@ public class AddressController : ControllerBase
         return NotFound();
     }
 
-    [HttpPut]
+    [HttpPut("{id}")]
     public async Task<IActionResult> Update([FromBody] AddressViewModel address)
     {
         //address = address.Trim();

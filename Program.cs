@@ -56,6 +56,7 @@ builder.Services.AddSwaggerGen(options =>
 {
     options.CustomSchemaIds(x => x.FullName);
     options.SwaggerDoc("v1", new OpenApiInfo { Title = "UncleApp", Version = "v1" });
+    options.AddSecurityDefinition("Bearer", securtiyScheme);
     options.AddSecurityRequirement(securityreq);
 
 });

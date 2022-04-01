@@ -12,7 +12,7 @@ namespace UncleApp.Areas.Admin.Controllers
 {
     [Authorize(Roles ="Admin")]
     [Area("Admin")]
-    [Route("api/v1/[area]/[controller]/[action]/{id?}")]
+    [Route("api/v1/[area]/[controller]/[action]")]
     [ApiController]
     public class CustomerController : ControllerBase
     {
@@ -42,7 +42,7 @@ namespace UncleApp.Areas.Admin.Controllers
             }
             return Ok(JsonSerializer.Serialize(customers));
         }
-        [HttpGet]
+        [HttpGet("{id}")]
         public IActionResult Detail(long id)
         {
             var d=_dataContext.customers.Include(p=>p.address).FirstOrDefault(p => p.Id == id);
@@ -87,7 +87,7 @@ namespace UncleApp.Areas.Admin.Controllers
             }
             return Created("create",new {message="Your Customer is Created"});
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> delete(long id)
         {
             var q=_dataContext.customers.FirstOrDefault(p=>p.Id==id);
@@ -99,7 +99,7 @@ namespace UncleApp.Areas.Admin.Controllers
             await _dataContext.SaveChangesAsync();
             return Ok(new { message="Your Customer is Deleted" });
         }
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> Update(long id,[Bind(new String[] {
             "Fbname",
             "realname",

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace UncleApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Route("api/v1/[area]/[controller]/{id?}")]
+    [Route("api/v1/[area]/[controller]")]
     [Authorize(Roles ="Admin")]
     [ApiController]
     public class ProductController : ControllerBase
@@ -17,14 +17,14 @@ namespace UncleApp.Areas.Admin.Controllers
         {
             _dataContext = datacontext;
         }
-        [Route("api/v1/[area]/[controller]/")]
+        
         [HttpGet]
         public IActionResult Index()
         {
             var q = _dataContext.dumblingTypes.Select(p => new ProductViewModel() { Name = p.Name, Created = p.Created, price = p.Price, Updated = p.Updated }).ToList();
             return Ok(new { message = "All Itmes", count = q.Count, data = q });
         }
-        [HttpGet]
+        [HttpGet("{id}")]
         public IActionResult Detail(long id)
         {
             var q = _dataContext.dumblingTypes.FirstOrDefault(p => p.Id == id);
@@ -56,7 +56,7 @@ namespace UncleApp.Areas.Admin.Controllers
             await _dataContext.SaveChangesAsync();
             return Created("created", new { message = "This product is created" });
         }
-        [HttpPut]
+        [HttpPut("{id}")]
         public async Task<IActionResult> Update(long id, [Bind(new String[] {
             "Description",
             "price",
@@ -83,7 +83,7 @@ namespace UncleApp.Areas.Admin.Controllers
             await _dataContext.SaveChangesAsync();
             return Ok(new { messgae = "This product is updated" });
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(long id)
         {
             DumblingType b = _dataContext.dumblingTypes.FirstOrDefault(p => p.Id == id);
