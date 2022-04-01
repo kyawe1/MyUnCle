@@ -10,6 +10,7 @@ using UncleApp.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.OpenApi.Models;
+using Pomelo.EntityFrameworkCore;
 
 
 
@@ -24,7 +25,8 @@ byte[] b = Encoding.ASCII.GetBytes(ok);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<DataContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DataContext")));
+var server=new MySqlServerVersion(new Version(8,0,28));
+builder.Services.AddDbContext<DataContext>(options => options.UseMySql(builder.Configuration.GetConnectionString("DataContext"),server));
 builder.Services.AddTransient<NotAuthenticatedOnly>();
 var securtiyScheme = new OpenApiSecurityScheme()
 {

@@ -9,7 +9,11 @@ namespace UncleApp.Context
     {
 
         
-
+/// <summary>
+///  bad things
+/// </summary>
+/// <param name="options"></param>
+/// <returns></returns>
         public DataContext(DbContextOptions<DataContext> options) : base(options){
             
         }
@@ -45,11 +49,9 @@ namespace UncleApp.Context
                 NormalizedEmail = "KYAWE225@GMAIL.COM",
                 Email = "kyawe225@gmail.com",
                 EmailConfirmed = true,
-                SecurityStamp = Guid.NewGuid().ToString(),
             };
             user.PasswordHash=hasher.HashPassword(user,"123456");
             modelBuilder.Entity<IdentityUser>().HasData(user);
-
             modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
             {
                 RoleId = admin_id,
