@@ -33,7 +33,7 @@ namespace UncleApp.Areas.Admin.Controllers
                     Fbname = p.Fbname,
                     realname = p.realname,
                     PhoneNumber = p.PhoneNumber,
-                    address = CustomerViewModel.getActiveAddres(p.address)
+                    address = CustomerViewModel.getActiveAddress(p.address)
                 }).ToList();
             }
             catch(Exception ex)

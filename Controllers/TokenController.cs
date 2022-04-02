@@ -43,6 +43,34 @@ namespace UncleApp.Controllers
             }
 
         }
+        [HttpPost]
+        [AllowAnonymous]
+        [ServiceFilter(typeof(NotAuthenticatedOnly))]
+        public async Task<IActionResult> Register(RegisterViewModel _register)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    IdentityUser user = new IdentityUser
+                    {
+                        UserName = _register.UserName,
+                        Email = _register.UserName
+                    };
+                    IdentityResult result = await _user.CreateAsync(user, _register.Password);
+                    if (result.Succeeded)
+                    {
+                        return Ok("Your account is created");
+                    }
+                }
+                return BadRequest();
+            }
+            catch(ArgumentNullException ex)
+            {
+                return NotFound();
+            }
+
+        }
         [Authorize]
         [HttpPut]
         public async Task<IActionResult> AddWaitList()
