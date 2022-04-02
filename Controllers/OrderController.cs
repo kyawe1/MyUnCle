@@ -9,7 +9,7 @@ namespace UncleApp.Controllers;
 
 
 [ApiController]
-[Authorize(Roles ="Admin,Shopkeeper")]
+[Authorize(Roles = "Admin,Shopkeeper")]
 [Route("api/v1/shopkeeper/[controller]/[action]")]
 public class OrderController : ControllerBase
 {
@@ -18,7 +18,7 @@ public class OrderController : ControllerBase
     {
         _datacontext = context;
     }
-    
+
     [HttpGet]
     [ActionName("Dumbling")]
     public IActionResult GetAllDumbling()
@@ -83,22 +83,25 @@ public class OrderController : ControllerBase
                 Items = orders
             };
         }
-        temp = new Order()
+        else
         {
-            Customer = new Customer()
+            temp = new Order()
             {
-                Fbname = order.Fbname,
-                realname = order.realname,
-                PhoneNumber = order.PhoneNumber,
-                address = new List<Address>{
+                Customer = new Customer()
+                {
+                    Fbname = order.Fbname,
+                    realname = order.realname,
+                    PhoneNumber = order.PhoneNumber,
+                    address = new List<Address>{
                     new Address(){
                         Address_String=order.addresses,
                         active=true
                     }
                 }
-            },
-            Items = orders
-        };
+                },
+                Items = orders
+            };
+        }
         _datacontext.Add(temp);
         await _datacontext.SaveChangesAsync();
         return Created("created", "this is created");

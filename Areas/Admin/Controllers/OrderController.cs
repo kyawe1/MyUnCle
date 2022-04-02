@@ -43,7 +43,7 @@ namespace UncleApp.Areas.Admin
         [HttpPost]
         public async Task<IActionResult> create(OrderViewModel order)
         {
-            var user = _dataContext.customers.FirstOrDefault(p => order.Customer_Name.Contains(p.Fbname));
+            var user = _dataContext.customers.FirstOrDefault(p => order.Customer_Name.Equals(p.Fbname));
             if (user == null)
             {
                 return BadRequest();
@@ -70,7 +70,5 @@ namespace UncleApp.Areas.Admin
             await _dataContext.SaveChangesAsync();
             return Ok(new { message = "This Order is successfully cencelled" });
         }
-        
-        
     }
 }
