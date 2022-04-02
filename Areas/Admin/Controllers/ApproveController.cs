@@ -20,10 +20,11 @@ public class ApproveController : ControllerBase{
         _role=role;
     }
     [HttpGet]
-    public IActionResult Index(){
-        var q=_context.Users.Select(p=>new ApproveViewModel(){
-            UserName=p.UserName,
-            Email=p.Email
+    public IActionResult Index(bool pending=true){
+        var q=_context.waitingLists.Include(p=> p.User).Where(p=> p.waiting==pending).Select(p=>new ApproveViewModel(){
+            UserName=p.User.UserName,
+            Email=p.User.Email,
+            
         }).ToList();
         return Ok(q);
     }

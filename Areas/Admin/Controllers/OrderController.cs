@@ -10,7 +10,7 @@ namespace UncleApp.Areas.Admin
 {
     
     [Area("Admin")]
-    [Route("api/v1/[area]/[controller]/[action]/{id?}")]
+    [Route("api/v1/[area]/[controller]/[action]")]
     [ApiController]
     [Authorize(Roles = "Admin")]
     public class OrderController : Controller
@@ -58,7 +58,7 @@ namespace UncleApp.Areas.Admin
             await _dataContext.SaveChangesAsync();
             return Created("Created", new { message = "Your Customer's Order is Created" });
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> delete(long id)
         {
             var order=_dataContext.orders.FirstOrDefault(p => p.Id == id);

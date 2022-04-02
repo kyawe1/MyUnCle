@@ -10,7 +10,7 @@ namespace UncleApp.Controllers;
 
 [ApiController]
 [Authorize(Roles ="Admin,Shopkeeper")]
-[Route("api/v1/shopkeeper/[controller]/[action]/{id?}")]
+[Route("api/v1/shopkeeper/[controller]/[action]")]
 public class OrderController : ControllerBase
 {
     private DataContext _datacontext { get; }
@@ -18,13 +18,14 @@ public class OrderController : ControllerBase
     {
         _datacontext = context;
     }
+    
     [HttpGet]
     [ActionName("Dumbling")]
     public IActionResult GetAllDumbling()
     {
         return Ok(new { message = "All dumbling types", data = _datacontext.dumblingTypes.Select(p => new { Name = p.Name, DumblingNumber = p.Id }).ToList() });
     }
-    [HttpGet]
+    [HttpGet("{id}")]
     public IActionResult Detail(int id)
     {
         var q = _datacontext.orders.FirstOrDefault(p => p.Id == id);
@@ -103,7 +104,7 @@ public class OrderController : ControllerBase
         return Created("created", "this is created");
     }
 
-    [HttpPut]
+    [HttpPut("{id}")]
     public async Task<IActionResult> Update(long id, ShopkeeperUpdateViewModel order)
     {
         if (ModelState.IsValid)

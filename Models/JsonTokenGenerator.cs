@@ -40,6 +40,10 @@ namespace UncleApp.Models
         public async Task<Claim[]> produceArrayAsync(LoginViewModel model)
         {
             var user=await _userManager.FindByNameAsync(model.UserName);
+            if (user == null)
+            {
+                throw new ArgumentNullException();
+            }
             List<Claim> claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.NameIdentifier,user.Id),

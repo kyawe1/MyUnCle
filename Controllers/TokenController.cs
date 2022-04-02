@@ -29,12 +29,18 @@ namespace UncleApp.Controllers
         [ServiceFilter(typeof(NotAuthenticatedOnly))]
         public async Task<IActionResult> login(LoginViewModel _login)
         {
-            string token = await handler.GenerateJsonTokenAsync(_login);
-            if (string.IsNullOrEmpty(token))
+            try
             {
-                return BadRequest();
+                string token = await handler.GenerateJsonTokenAsync(_login);
+                if (string.IsNullOrEmpty(token))
+                {
+                    return BadRequest();
+                }
+                return Ok(token);
+            }catch(ArgumentNullException ex)
+            {
+                return NotFound();
             }
-            return Ok(token);
 
         }
         [Authorize]
